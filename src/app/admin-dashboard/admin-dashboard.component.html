@@ -1,0 +1,108 @@
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container-fluid">
+    <div>
+      <h1>Admin Dashboard</h1>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end logout-button">
+      <button (click)="logout()" class="btn btn-outline-danger">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Main Content -->
+<div class="container mt-4">
+  <!-- Search Bar -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form my-4">
+    <div class="input-group">
+      <input type="text" formControlName="title" class="form-control" placeholder="Search for movies..."
+        aria-label="Search for movies"
+        [class.is-invalid]="searchForm.get('title')?.invalid && searchForm.get('title')?.touched" />
+      <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()"
+        [disabled]="!searchForm.get('title')?.value">
+        <i class="bi bi-x-circle">claer</i>
+      </button>
+      <button class="btn btn-primary" type="submit" [disabled]="loading">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+    <!-- Validation Error -->
+    <div *ngIf="searchForm.get('title')?.invalid && searchForm.get('title')?.touched" class="invalid-feedback d-block">
+      Movie title is required.
+    </div>
+  </form>
+
+
+
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="searchResults.length > 0 && !loading">
+    <h3 class="mb-4">Search Results:</h3>
+
+    <!-- Movie Grid -->
+    <div class="movie-grid">
+      <div class="movie-card" *ngFor="let movie of searchResults" [class.selected]="isSelected(movie.imdbID)"
+      (click)="toggleSelection(movie.imdbID)">
+        <img [src]="movie.poster !== 'N/A' ? movie.poster : 'assets/poster-placeholder.png'" alt="{{ movie.title }}"
+          class="movie-poster" />
+        <div class="movie-details">
+          <h5>{{ movie.title }} ({{ movie.year }})</h5>
+          <p>IMDB ID: {{ movie.imdbID }}</p>
+          <div class="button-group mt-3">
+            <!-- Add Movie Button -->
+            <button class="btn btn-success btn-add me-2" (click)="addMovie(movie.imdbID)" title="Add Movie">
+              <i class="bi bi-plus-circle me-2"></i> Add Movie
+            </button>
+
+            <!-- Remove Movie Button -->
+            <button class="btn btn-danger btn-remove" (click)="removeMovie(movie.imdbID)" title="Remove Movie">
+              <i class="bi bi-trash me-2"></i> Remove Movie
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results Found -->
+  <div *ngIf="searchResults.length === 0 && !loading && searchForm.touched && !errorMessage"
+    class="alert alert-warning text-center mt-4">
+    <i class="bi bi-exclamation-triangle-fill"></i> No movies found matching your search.
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !loading" class="alert alert-danger text-center mt-4">
+    <i class="bi bi-exclamation-circle-fill"></i> {{ errorMessage }}
+  </div>
+</div>
+<!-- The toast will be displayed on top of the screen -->
+<div id="toast" class="toast-container">
+  <div class="toast-message">
+    <span id="toast-text"></span>
+  </div>
+</div>
+
+<!-- Control panel for batch actions -->
+<div class="control-panel" *ngIf="selectedMovies.length > 0">
+  <div class="control-panel-button-group">
+    <button class="control-panel-button control-panel-btn-add" (click)="addSelectedMovies()">Add Selected Movies</button>
+    <button class="control-panel-button control-panel-btn-delete" (click)="deleteSelectedMovies()">Delete Selected Movies</button>
+    <button class="control-panel-button control-panel-btn-clear" (click)="clearSelection()">Clear Selection</button>
+  </div>
+</div>
+
+
+
+<!-- Toast for showing messages -->
+<div id="toast" class="toast">
+  <div id="toast-text"></div>
+</div>

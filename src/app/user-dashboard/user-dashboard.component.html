@@ -1,0 +1,142 @@
+<!-- Top Navigation Bar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container-fluid">
+    <div>
+      <h1>Dashboard</h1>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end logout-button">
+      <button (click)="logout()" class="btn btn-outline-danger">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-4">
+  <h2 class="text-center">Movies</h2>
+
+
+
+  <!-- Search Form -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search-form my-4">
+    <div class="input-group">
+      <input type="text" formControlName="title" class="form-control" placeholder="Search for movies..."
+        aria-label="Search for movies"
+        [class.is-invalid]="searchForm.get('title')?.invalid && searchForm.get('title')?.touched" />
+      <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()"
+        [disabled]="!searchForm.get('title')?.value">
+        <i class="bi bi-x-circle"></i> Clear
+      </button>
+      <button class="btn btn-primary" type="submit" [disabled]="loading">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
+    <!-- Validation Error -->
+    <div *ngIf="searchForm.get('title')?.invalid && searchForm.get('title')?.touched" class="invalid-feedback d-block">
+      Movie title is required.
+    </div>
+  </form>
+
+
+  <!-- Movie List -->
+  <div class="movie-grid">
+    <div *ngFor="let movie of movies" class="movie-card">
+      <img [src]="movie.poster !== 'N/A' ? movie.poster : 'assets/poster-placeholder.png'" alt="{{ movie.title }}"
+        class="movie-poster" (click)="openMovieDetails(movie)" />
+      <div class="movie-details">
+        <h5>{{ movie.title }}</h5>
+        <p>{{ movie.year }}</p>
+        <p>IMDB ID: {{ movie.imdbID }}</p>
+        <div class="rating-input">
+          <label for="rating-{{ movie.imdbID }}" class="visually-hidden"></label>
+          <!-- Display the rounded rating with a star -->
+          <div class="rating-display">
+            <span class="yellow-star">&#9733;</span>
+            <span class="rating-number">{{ movie.userRating }}</span>
+          </div>
+
+          <p class="rate-movie" (click)="openRatingModal(movie)">Rate the movie</p>
+        </div>
+
+
+        <!-- Rating Modal -->
+        <div class="modal" *ngIf="selectedMovie" (click)="closeRatingModal()">
+          <div class="modal-content" (click)="$event.stopPropagation()">
+            <span class="close" (click)="closeRatingModal()">X</span>
+            <h2 class="modal-title">{{ selectedMovie.title }}</h2>
+            <p>Year: {{ selectedMovie.year }}</p>
+            <p>IMDB ID: {{ selectedMovie.imdbID }}</p>
+            <div class="stars">
+              <ng-container *ngFor="let rating of [5, 4, 3, 2, 1]">
+                <input type="radio" id="modal-star-{{ selectedMovie.imdbID }}-{{ rating }}"
+                  name="modal-rating-{{ selectedMovie.imdbID }}" [value]="rating" />
+                <label for="modal-star-{{ selectedMovie.imdbID }}-{{ rating }}" class="star"
+                  (click)="rateMovie(rating, selectedMovie.imdbID)">
+                  &#9733;
+                </label>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <!-- Movie Details Modal -->
+        <div class="details-modal" *ngIf="selectedMovieDetails" (click)="closeMovieDetails()">
+          <div class="details-modal-content" (click)="$event.stopPropagation()">
+            <span class="details-close" (click)="closeMovieDetails()">X</span>
+
+            <!-- Movie Poster and Title -->
+            <div class="details-header">
+              <img src="{{ selectedMovieDetails.poster }}" alt="{{ selectedMovieDetails.title }} Poster"
+                class="details-poster" />
+              <div class="details-title-info">
+                <h2 class="details-title">{{ selectedMovieDetails.title }} ({{ selectedMovieDetails.year }})</h2>
+                <p class="details-genre">{{ selectedMovieDetails.genre }}</p>
+              </div>
+            </div>
+
+            <!-- Movie Information Section -->
+            <div class="details-info">
+              <p><strong>Runtime: </strong> {{ selectedMovieDetails.runtime }}</p>
+              <p><strong>IMDb ID: </strong> {{ selectedMovieDetails.imdbID }}</p>
+              <p><strong>Language: </strong> {{ selectedMovieDetails.language }}</p>
+              <p><strong>Country: </strong> {{ selectedMovieDetails.country }}</p>
+              <p><strong>App Rating: </strong> {{ selectedMovieDetails.appRating }}/10</p>
+            </div>
+
+            <!-- Movie Plot -->
+            <div class="details-plot">
+              <h3>Plot</h3>
+              <p>{{ selectedMovieDetails.plot }}</p>
+            </div>
+
+            <!-- Cast and Director -->
+            <div class="details-cast">
+              <h3>Actors</h3>
+              <p>{{ selectedMovieDetails.actors }}</p>
+              <h3>Director</h3>
+              <p>{{ selectedMovieDetails.director }}</p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-center align-items-center mt-4 pagination-controls">
+    <button (click)="previousPage()" class="btn btn-secondary mx-2" [disabled]="currentPage === 0">Previous</button>
+    <span class="mx-3">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" class="btn btn-secondary mx-2" [disabled]="currentPage >= totalPages - 1">Next</button>
+  </div>
+
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+</div>

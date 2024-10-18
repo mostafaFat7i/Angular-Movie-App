@@ -1,0 +1,531 @@
+/* Navigation Bar */
+.navbar {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5); 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+.container{
+  height: 100%; 
+  backdrop-filter: blur(5px); 
+  padding: 20px;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 60px;
+  font-family: fantasy;
+  color: #333;
+}
+
+.logout-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.logout-button .btn {
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* Search Bar */
+
+.search-form {
+  max-width: 700px; /* Maximum width for the form */
+  margin: 2rem auto; /* Center the form horizontally with top/bottom margin */
+  border-radius: 25px; /* Rounded borders for the form */
+  overflow: hidden; /* Ensures that the inner elements respect the rounded borders */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #f8f9fa; /* Light background for contrast */
+}
+
+.input-group {
+  display: flex; /* Use flexbox for layout */
+  width: 100%; /* Full width for responsiveness */
+  height: 100%;
+}
+
+.input-group .form-control {
+  flex: 1;
+  border: 1px solid #ced4da; /* Light border for the input */
+  border-radius: 25px 0 0 25px; /* Rounded left side for the input */
+  padding: 0.5rem 1rem; 
+  transition: border-color 0.3s; 
+}
+
+.input-group .form-control:focus {
+  border-color: #007bff; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue shadow */
+}
+
+.input-group .btn {
+  border: none; /* Remove border */
+  border-radius: 0 25px 25px 0; /* Rounded right side for the button */
+  padding: 0.5rem 1rem; /* Padding for better touch area */
+}
+
+.input-group .btn-outline-secondary {
+  background-color: #e9ecef; /* Light background for clear button */
+  color: #495057; /* Dark text color */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.input-group .btn-outline-secondary:hover {
+  background-color: #ced4da; /* Slightly darker on hover */
+}
+
+.input-group .btn-primary {
+  background-color: #007bff; /* Primary button color */
+  color: white; /* White text */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.input-group .btn-primary:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.input-group .btn-primary i,
+.input-group .btn-outline-secondary i {
+  margin-right: 0.5rem; /* More space for the icons */
+}
+
+
+/* Movie Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 1rem;
+  justify-items: start; /* Ensures items align to the start, not center */
+}
+
+.movie-item {
+  max-width: 20%; /* Enforces max width to 20% of the container */
+  width: 100%; /* Takes full width of the grid cell, but limited by max-width */
+}
+
+.movie-card {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.movie-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.movie-details h5 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-details p {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .card img {
+    height: 200px !important;
+  }
+}
+
+.pagination-controls {
+  text-align: center;
+  padding: 10px;
+}
+
+.pagination-controls button {
+  font-size: 1rem;
+  padding: 5px 10px;
+
+  margin: 0px 10px;
+
+  border-radius: 5px;
+}
+
+.pagination-controls span {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.stars {
+  display: inline-block;
+  direction: rtl; /* Reverse order to allow stars to be filled from left to right */
+}
+
+.stars input[type="radio"] {
+  display: none; /* Hide radio inputs */
+}
+
+.stars label.star {
+  font-size: 2rem; /* Size of the stars */
+  color: #d3d3d3; /* Default color (unselected stars) */
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.stars input[type="radio"]:checked ~ label.star {
+  color: #ffd700; /* Selected star color (gold) */
+}
+
+/* Modal container */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for better focus */
+  animation: fadeIn 0.5s ease;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 80%; /* Responsive width */
+  max-width: 500px; /* Limit max width */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.5s ease;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Close button */
+.modal .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal .close:hover {
+  color: #ff4d4d; /* Change color on hover for clarity */
+}
+
+/* Modal title */
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Star rating container */
+.stars {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+/* Star rating */
+.star {
+  font-size: 30px;
+  color: #ccc; /* Default grey color */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+/* Hover and selected stars */
+.star:hover,
+input[type="radio"]:checked ~ .star {
+  color: #f39c12; /* Star gold color */
+}
+
+/* Make modal fade in smoothly */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal slide in from top */
+@keyframes slideIn {
+  from {
+    transform: translateY(-30%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%; /* Max width for smaller screens */
+    padding: 20px;
+  }
+}
+
+.rate-movie {
+  cursor: pointer;
+
+}
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stars {
+  display: flex;
+}
+
+.star {
+  color: #ccc; /* Default star color */
+  font-size: 24px; /* Adjust star size */
+}
+
+input[type="radio"]:checked + .star {
+  color: gold; /* Color for selected stars */
+}
+
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically, if the height is defined */
+  text-align: center; /* Center text within the container */
+  margin: 20px; /* Optional: add some margin around the component */
+}
+
+
+.rating-display {
+  display: flex;
+  flex-direction: column; /* Stack the star and number vertically */
+  align-items: center; /* Center them horizontally */
+  margin-top: 10px; /* Optional: space between the rating display and other elements */
+}
+
+.rating-number {
+  font-size: 20px; /* Adjust font size for the rating number */
+  margin-top: 5px; /* Space between the star and number */
+}
+
+.yellow-star {
+  color: gold; /* Color for the yellow star */
+  font-size: 30px; /* Increase star size if needed */
+}
+
+
+
+.yellow-star {
+  color: gold; /* Color for the yellow star */
+  font-size: 20px; /* Same size as rating number */
+}
+
+.rate-movie {
+  cursor: pointer; /* Change cursor to pointer for clickability */
+  color: blue; /* Optional: change text color */
+  text-decoration: underline; /* Optional: underline text */
+  margin-top: 10px; /* Space above the clickable text */
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+/* Modal Container */
+.details-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark background overlay */
+  animation: fadeIn 0.5s ease;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.details-modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slideIn 0.5s ease;
+  overflow-y: auto;
+  max-height: 80vh; /* Prevent overflow */
+}
+
+/* Close Button */
+.details-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.details-close:hover {
+  color: #ff4d4d;
+}
+
+/* Modal Header (Poster and Title) */
+.details-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.details-poster {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-right: 20px;
+}
+
+.details-title-info {
+  flex: 1;
+}
+
+.details-title {
+  font-size: 24px;
+  margin: 15px 0px;
+  color: #333;
+}
+
+.details-genre {
+  font-size: 16px;
+  color: #777;
+}
+
+/* Movie Information */
+.details-info {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.details-info p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+/* Movie Plot Section */
+.details-plot {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.details-plot h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.details-plot p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Cast and Director Section */
+.details-cast {
+  margin-bottom: 20px;
+}
+
+.details-cast h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.details-cast p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Fade In and Slide In Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+  .details-modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .details-poster {
+    width: 100px;
+    margin-right: 15px;
+  }
+
+  .details-title {
+    font-size: 20px;
+  }
+
+  .details-genre {
+    font-size: 14px;
+  }
+
+  .details-info p,
+  .details-plot p,
+  .details-cast p {
+    font-size: 14px;
+  }
+}
+
+
+
+
+

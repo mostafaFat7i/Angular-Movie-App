@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+body {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    height: 100vh; /* Full viewport height */
+    background-image: url('assets/background.png'); /* Path to your image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; /* Fixed background */
+    color: white; /* Optional: Change text color for visibility */
+}
+
+.app-container {
+    position: relative; /* Allow child elements to be positioned within */
+    z-index: 1; /* Ensure content is above the background */
+
+}

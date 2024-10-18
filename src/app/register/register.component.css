@@ -1,0 +1,91 @@
+/* src/app/register/register.component.css */
+
+
+
+.container {
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 100vh; /* Full viewport height */
+    backdrop-filter: blur(5px); /* Add a blur effect to the background */
+    padding: 20px; /* Add some padding */
+}
+
+h2 {
+    color: rgb(252, 237, 237); /* Gold color for the heading */
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px;
+    font-family: Fantasy;
+    font-weight: bold;
+    font-size: 60px; /* Add some space below the heading */
+}
+
+form {
+    max-width: 400px;
+    width: 100%; /* Full width for responsiveness */
+    padding: 20px;
+    border: 1px solid gold; /* Gold border for the form */
+    border-radius: 12px; /* More rounded corners */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+    color: white; /* Change text color to white for form elements */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+    margin: 0 auto; /* Center the form in the container */
+}
+
+div.form-group {
+    margin-bottom: 20px; /* Increase space between form elements */
+    margin-right: 25px;
+}
+
+label {
+    display: block; /* Make labels block-level elements */
+    margin-bottom: 5px; /* Space between label and input */
+    color: gold; /* Color for labels */
+}
+
+input {
+    width: 100%;
+    padding: 12px; /* Increased padding for input fields */
+    border: 1px solid gold; /* Gold border for input fields */
+    border-radius: 8px; /* More rounded corners */
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background for input */
+    color: white; /* White text color for input */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+input:focus {
+    outline: none; /* Remove outline */
+    border-color: #FFD700; /* Change border color on focus */
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly lighten background on focus */
+}
+
+button {
+    width: 100%;
+    padding: 12px; /* Increased padding for button */
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    background-color: gold; /* Gold background for button */
+    color: black; /* Black text for button */
+    font-weight: bold; /* Bold text */
+    font-size: 16px; /* Increased font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s; /* Smooth transitions */
+}
+
+button:hover {
+    background-color: #FFD700; /* Slightly brighter gold on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.alert {
+    margin-top: 10px;
+    color: gold; /* Gold color for alert messages */
+    text-align: center; /* Center alert messages */
+}
+
+.register-link {
+    color: gold; /* Gold color for register link */
+    text-align: center; /* Center the register link */
+    margin-top: 20px; /* Space above the link */
+}
